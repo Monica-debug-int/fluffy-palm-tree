@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin sign in | FitBuddy</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">F</span> FitBuddy</a><a class="quiet-link" href="/">Back to FitBuddy</a></header>
+  <main class="page-shell login-shell"><section class="login-panel"><p class="eyebrow">FITBUDDY / ADMIN</p><h1>Sign in to<br><em>your dashboard.</em></h1>
+    {% if error %}<p class="form-error" role="alert">{{ error }}</p>{% endif %}
+    <form action="/admin-login" method="post" class="profile-form login-form"><label class="field full-field">Admin password<input name="password" type="password" autocomplete="current-password" required></label><button class="primary-button full-field" type="submit">Continue <span aria-hidden="true">↗</span></button></form>
+  </section></main>
+  <footer class="site-footer"><span>FITBUDDY / ADMIN ACCESS</span></footer>
+</body>
+</html>

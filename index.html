@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f3f5ee">
+	<title>FitBuddy | A week that moves with you</title>
+	<link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+	<header class="topbar">
+		<a class="brand" href="/" aria-label="FitBuddy home"><span class="brand-mark">F</span> FitBuddy</a>
+		<a class="quiet-link" href="/admin-login">Admin</a>
+	</header>
+	<main class="page-shell home-layout">
+		<section class="intro">
+			<p class="eyebrow">YOUR NEXT SEVEN DAYS, CONSIDERED</p>
+			<h1>Build a routine<br>that <em>fits you.</em></h1>
+			<p class="intro-copy">Tell us where you are and what you’re working toward. FitBuddy will shape a practical week of movement, recovery, and small wins.</p>
+			<div class="week-stamp"><span class="stamp-number">07</span><span>days of thoughtful<br>training and recovery</span></div>
+		</section>
+		<section class="form-panel" aria-labelledby="form-title">
+			<div class="panel-heading">
+				<div><p class="eyebrow">START WITH THE BASICS</p><h2 id="form-title">Your fitness profile</h2></div>
+				<span class="step-count">01 / 01</span>
+			</div>
+			<form action="/generate-workout" method="post" class="profile-form">
+				<label class="field full-field">Name<input name="username" type="text" minlength="2" maxlength="80" placeholder="How should we address you?" autocomplete="name" required></label>
+				<label class="field">User ID<input name="user_id" type="text" minlength="3" maxlength="64" pattern="[A-Za-z0-9_-]+" placeholder="e.g. alex_01" required><span class="field-note">Use the same ID to find your plans again.</span></label>
+				<label class="field">Age<input name="age" type="number" min="13" max="110" placeholder="Years" required></label>
+				<label class="field">Weight <span class="unit">kg</span><input name="weight" type="number" min="25.1" max="350" step="0.1" placeholder="e.g. 68" required></label>
+				<label class="field">Fitness goal<select name="goal" required><option value="" disabled selected>Choose a direction</option><option>Weight loss</option><option>Muscle gain</option><option>General wellness</option><option>Flexibility</option><option>Endurance</option></select></label>
+				<fieldset class="field full-field intensity-field"><legend>Workout intensity</legend><div class="choice-row">
+					<label class="choice"><input type="radio" name="intensity" value="Low" required><span>Low</span></label>
+					<label class="choice"><input type="radio" name="intensity" value="Medium"><span>Medium</span></label>
+					<label class="choice"><input type="radio" name="intensity" value="High"><span>High</span></label>
+				</div></fieldset>
+				<button class="primary-button full-field" type="submit">Generate my week <span aria-hidden="true">↗</span></button>
+				<p class="form-footnote full-field">Plans are general fitness guidance, not a substitute for professional medical advice.</p>
+			</form>
+		</section>
+	</main>
+	<footer class="site-footer"><span>FITBUDDY / PERSONAL FITNESS PLANNING</span><span>Move well. Recover well.</span></footer>
+</body>
+</html>

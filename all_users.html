@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin dashboard | FitBuddy</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">F</span> FitBuddy <span class="admin-word">ADMIN</span></a><a class="quiet-link" href="/admin-logout">Sign out</a></header>
+  <main class="page-shell dashboard-shell"><div class="dashboard-heading"><div><p class="eyebrow">PRIVATE ADMIN AREA</p><h1>Plan <em>overview</em></h1></div><span class="user-count">{{ users|length }} USER{% if users|length != 1 %}S{% endif %}</span></div>
+    {% if users %}
+    <div class="table-wrap"><table><thead><tr><th>User</th><th>Profile</th><th>Goal / intensity</th><th>Saved plans</th><th>Action</th></tr></thead><tbody>
+      {% for user in users %}<tr><td><strong>{{ user.username }}</strong><span class="table-sub">{{ user.user_id }}</span></td><td>{{ user.age }} years<br>{{ user.weight }} kg</td><td>{{ user.goal }}<br>{{ user.intensity }}</td><td>
+        {% for plan in user.plans %}<details class="plan-record"><summary>Plan #{{ plan.id }}{% if plan.updated_workout_plan %} · revised{% endif %}</summary><div class="record-content"><h3>Original plan</h3><pre>{{ plan.original_workout_plan }}</pre>{% if plan.updated_workout_plan %}<h3>Updated plan</h3><pre>{{ plan.updated_workout_plan }}</pre>{% endif %}{% if plan.feedback %}<h3>Feedback</h3><p>{{ plan.feedback }}</p>{% endif %}<h3>Nutrition / recovery</h3><p>{{ plan.nutrition_tip }}</p></div></details>{% endfor %}
+      </td><td><form action="/admin/delete-user/{{ user.user_id }}" method="post" onsubmit="return confirm('Delete this user and all saved plans?')"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="text-button danger-button" type="submit">Delete</button></form></td></tr>{% endfor %}
+    </tbody></table></div>
+    {% else %}<div class="empty-state"><p class="eyebrow">NO SAVED PROFILES</p><h2>Plans will appear here.</h2></div>{% endif %}
+  </main>
+  <footer class="site-footer"><span>FITBUDDY / ADMIN DASHBOARD</span><a href="/">Open the app</a></footer>
+</body>
+</html>

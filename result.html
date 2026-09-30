@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your week | FitBuddy</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">F</span> FitBuddy</a><a class="quiet-link" href="/">New plan <span aria-hidden="true">↗</span></a></header>
+  <main class="page-shell result-shell">
+    <div class="result-heading"><div><p class="eyebrow">YOUR PLAN IS READY</p><h1>A week for <em>{{ user.username }}</em></h1></div><div class="profile-tags"><span>{{ user.goal }}</span><span>{{ user.intensity }} intensity</span></div></div>
+    <section class="profile-strip" aria-label="Your details"><div><span class="strip-label">USER ID</span><strong>{{ user.user_id }}</strong></div><div><span class="strip-label">AGE</span><strong>{{ user.age }}</strong></div><div><span class="strip-label">WEIGHT</span><strong>{{ user.weight }} kg</strong></div><div><span class="strip-label">GOAL</span><strong>{{ user.goal }}</strong></div></section>
+    <div class="result-grid">
+      <section class="plan-section"><div class="section-title"><span class="section-index">01</span><div><p class="eyebrow">YOUR ORIGINAL PLAN</p><h2>Seven days in motion</h2></div></div><article class="plan-copy">{{ plan.original_workout_plan }}</article></section>
+      <aside class="side-column"><section class="tip-panel"><p class="eyebrow">FUEL + RECOVERY</p><h2>A small thing that helps</h2><p>{{ plan.nutrition_tip }}</p></section>
+        <section class="feedback-panel"><p class="eyebrow">MAKE IT YOURS</p><h2>Want to adjust the week?</h2><p>Tell us what felt too easy, too demanding, or simply not quite right.</p>
+          <form action="/submit-feedback" method="post" class="feedback-form"><input type="hidden" name="user_id" value="{{ user.user_id }}"><input type="hidden" name="plan_id" value="{{ plan.id }}"><label class="field">Your feedback<textarea name="feedback" minlength="5" maxlength="2000" rows="5" placeholder="For example: I need shorter sessions on weekdays..." required></textarea></label><button class="primary-button" type="submit">Update this plan <span aria-hidden="true">↗</span></button></form>
+        </section>
+      </aside>
+    </div>
+    {% if plan.updated_workout_plan %}
+    <section class="updated-section"><div class="section-title"><span class="section-index updated-index">02</span><div><p class="eyebrow">UPDATED FROM YOUR FEEDBACK</p><h2>Your revised week</h2></div></div><p class="feedback-quote">“{{ plan.feedback }}”</p><article class="plan-copy">{{ plan.updated_workout_plan }}</article></section>
+    {% endif %}
+  </main>
+  <footer class="site-footer"><span>FITBUDDY / PERSONAL FITNESS PLANNING</span><a href="/">Create another plan</a></footer>
+</body>
+</html>

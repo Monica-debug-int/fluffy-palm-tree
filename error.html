@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Something went wrong | FitBuddy</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">F</span> FitBuddy</a><a class="quiet-link" href="/">Home</a></header>
+  <main class="page-shell error-shell"><p class="eyebrow">A QUICK DETOUR</p><h1>We couldn’t complete<br><em>that request.</em></h1><p class="error-message" role="alert">{{ message }}</p><a class="primary-button button-link" href="/">Return to your profile <span aria-hidden="true">↗</span></a></main>
+  <footer class="site-footer"><span>FITBUDDY / PERSONAL FITNESS PLANNING</span></footer>
+</body>
+</html>
